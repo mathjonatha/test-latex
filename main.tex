@@ -320,6 +320,24 @@ attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
 \usepackage{exsheets} % cria questoes
 \SetupExSheets[points]{name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
 
+
+
+\newcommand{\titulo}[1]{%
+\begin{center}
+    {\LARGE {\scshape #1}}
+\end{center}
+}
+
+\newcommand{\linhaVertical}[2]{
+\setlength\columnseprule{#1}
+\def\columnseprulecolor{\color{#2}}%
+}
+
+
+\newcommand{\curso}{Matemática Aplicada | Janiheryson Felipe De Oliveira Martins}
+\newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha ~~~\textbf{Matricula:} 20223004788  ~~ \textbf{Semestre:} 2022.1}
+
+
 \DeclareInstance{exsheets-heading}{fancy-wp}{default}{
 toc-reversed = true ,
 indent-first = true ,
@@ -340,18 +358,6 @@ attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
 }
 
 %\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
-
-\newcommand{\titulo}[1]{%
-\begin{center}
-    {\LARGE {\scshape #1}}
-\end{center}
-}
-
-\newcommand{\linhaVertical}[2]{
-\setlength\columnseprule{#1}
-\def\columnseprulecolor{\color{#2}}%
-}
-
 
 
 \AddToShipoutPictureBG{
@@ -385,9 +391,6 @@ attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
             
 % \newcommand{\curso}{LIC.0910 - Equações Diferenciais Ordinárias - Francisco Batista de Medeiros}
 % \newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha Bernardo dos Santos ~~~\textbf{Matrícula:} 20181014300002 ~~ \textbf{Semestre:} 2021.1}
-
-\newcommand{\curso}{Matemática Aplicada | Janiheryson Felipe De Oliveira Martins}
-\newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha ~~~\textbf{Matricula:} 20223004788  ~~ \textbf{Semestre:} 2022.1}
 
 % \newcommand{\curso}{ Matemática Básica - Monitoria IFRN}
 % \newcommand{\projeto}{\textbf{Estudante:} Francesco ~~~\textbf{Professor:} Matheus Jonatha}
