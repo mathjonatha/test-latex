@@ -1,0 +1,63 @@
+\documentclass{scrartcl} % https://texdoc.org/serve/scrartcl/0
+\KOMAoptions{%
+    fontsize=10pt,%
+    titlepage=off,%
+    headings=big,%
+    headsepline=off,%
+    paper=a4,%   
+    twoside=off,%
+    % parskip=half+,%
+    % bibliography=totoc,%    
+}%
+
+\input{estrutura/preamble.tex}
+\input{estrutura/especificacoes.tex}
+\usepackage{capt-of}%%To get the caption
+\usepackage[bitstream-charter, uppercase=upright]{mathdesign} % Fonte ativa, estudar o pacote mathdesign
+\usepackage{mathpazo}
+\hypersetup{pdfauthor={Matheus Jonatha (@mathjonatha)},
+            pdftitle={Lista de Exercícios – Aula 01 - Matemática Aplicada},
+            pdfsubject={Matemática Aplicada - Janiheryson Felipe De Oliveira Martins},
+            pdfkeywords={mathjonatha,mthsjonatha},
+            pdfproducer={Produzido e compilado no overleaf.com},
+            pdfcreator={LuaLaTeX}}
+
+% \newcommand{\curso}{LIC.0910 - Equações Diferenciais Ordinárias - Francisco Batista de Medeiros}
+% \newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha Bernardo dos Santos ~~~\textbf{Matrícula:} 20181014300002 ~~ \textbf{Semestre:} 2021.1}
+
+\newcommand{\curso}{Matemática Aplicada | Janiheryson Felipe De Oliveira Martins}
+\newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha ~~~\textbf{Matricula:} 20223004788  ~~ \textbf{Semestre:} 2022.1}
+
+% \newcommand{\curso}{ Matemática Básica - Monitoria IFRN}
+% \newcommand{\projeto}{\textbf{Estudante:} Francesco ~~~\textbf{Professor:} Matheus Jonatha}
+
+\SetupExSheets{solution/print=true} % Mostra a solução das questões quando print = true
+
+% \usepackage[use-files]{xsim}
+
+
+% Início do documento           
+\begin{document}
+% \settasks{
+%     label = \theexercise.\arabic* ,
+%     item-indent = 2em ,
+%     label-width = 2em ,
+%     label-offset = 0pt
+% }
+\import{estrutura}{cabecalho.tex}
+
+
+% \import{disciplinas/algebra1}{lista03.tex}
+\import{disciplinas/matematica}{lista01.tex}
+% \import{disciplinas/monitoria}{lista_notacao_cientifica.tex}
+% \import{disciplinas/analise}{lista01.tex}
+% \import{disciplinas/analise}{lista02.tex}
+% \import{disciplinas/analise}{lista04.tex}
+
+% \begin{tasks}(2)
+% \task 1
+% \task 2
+% \task 3
+% \task 4
+% \end{tasks}
+\end{document}
