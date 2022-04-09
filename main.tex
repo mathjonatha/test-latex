@@ -33,36 +33,12 @@
 \usepackage{exsheets} % cria questoes
 \SetupExSheets[points]{name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
 
-\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
-toc-reversed = true ,
-indent-first = true ,
-vscale = 2 ,
-pre-code = \rule{\linewidth}{1pt} ,
-post-code = \rule{\linewidth}{1pt} ,
-title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
-number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
-points-format = \itshape ,
-points-pre-code = ( ,
-points-post-code = ) ,
-join =
-{
-number[r,B]title[l,B](.333em,0pt) ;
-number[r,B]points[l,B](.333em,0pt)
-} ,
-attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
-}
-
 %\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
 
 \newcommand{\titulo}[1]{%
 \begin{center}
     {\LARGE {\scshape #1}}
 \end{center}
-}
-
-\newcommand{\linhaVertical}[2]{
-\setlength\columnseprule{#1}
-\def\columnseprulecolor{\color{#2}}%
 }
 
 \graphicspath{{imgs/}} %informa a pasta em que as imagens estão
@@ -94,111 +70,6 @@ attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
 
 \definecolor{color1}{HTML}{2B323F}
 \definecolor{color2}{HTML}{CAEC7D}
-
-% ESTILOS
-\newtheoremstyle{geral}% Nome do estilo do teorema
-{0pt}% Espaço acima
-{0pt}% Espaço abaixo
-{\normalfont}% Fonte do corpo
-{}% Indent amount
-{\small\bf\sffamily\color{cor4}}% Theorem head font
-{:}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{} % Optional theorem note
-
-\newcounter{dummy}
-\newcounter{Exer}
-\newcounter{exer}
-\newcounter{exem}
-\theoremstyle{geral}
-\newtheorem{ExercicioT}[Exer]{Exercício resolvido}
-% \newtheorem{exercicioT}[exer]{ }
-\newtheorem{definicaoT}[dummy]{Conceito}
-\newtheorem{exemploT}[exem]{Exemplo}
-\newtheorem{obsT}{Observação}
-
-\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
-
-% Caixa de exercícios
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=corexercicio!10,
-linecolor=corexercicio,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{caixaEx}	
-
-% Caixa de definição
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=cordefinicao!10,
-linecolor=cordefinicao,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{caixaDE}	
-
-% Caixa de exemplos
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=corexemplo!10,
-linecolor=corexemplo,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{caixaExem}	
-
-% Caixa de observações	  
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=cor2!10,
-linecolor=cor2,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{caixaObs}
-
-
-\newenvironment{Exercicio}{\begin{caixaEx}\begin{ExercicioT}}{\end{ExercicioT}\end{caixaEx}}
-% \newenvironment{exercicio}{\begin{caixaEx}\begin{exercicioT}}{\end{exercicioT}\end{caixaEx}}
-\newenvironment{definicao}{\begin{caixaDE}\begin{definicaoT}}{\end{definicaoT}\end{caixaDE}}
-\newenvironment{exemplo}{\begin{caixaExem} \begin{exemploT}}{\end{exemploT}\end{caixaExem}}
-
-\newenvironment{obs}{\begin{caixaObs}\begin{obsT}}{\end{obsT}\end{caixaObs}}
-
-\newenvironment{exercicio}[2][{\color{corexercicio}Exercício}]{\begin{trivlist}
-
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
 
 %===================================================
 % MARGINS
@@ -268,119 +139,6 @@ citecolor=blue }
 
 
 
-% QUESTÕES
-% configurações das questões, bem como: pontuação e estrutura.
-
-\usepackage{tasks} % cria lista curta
-\usepackage{exsheets} % cria questoes
-\SetupExSheets[points]{ name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
-\SetupExSheets[question]{name=Exercício}
-
-\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
-toc-reversed = true ,
-indent-first = true ,
-vscale = 2 ,
-pre-code = \rule{\linewidth}{1pt} ,
-post-code = \rule{\linewidth}{1pt} ,
-title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
-number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
-points-format = \itshape ,
-points-pre-code = ( ,
-points-post-code = ) ,
-join =
-{
-number[r,B]title[l,B](.333em,0pt) ;
-number[r,B]points[l,B](.333em,0pt)
-} ,
-attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
-}
-
-%\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
-
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[brazil]{babel}
-%\usepackage[math]{anttor} % fonte um pouco mais estilizada
-\usepackage{import}
-%\usepackage{parskip}
-\usepackage{fontawesome}
-%=========================Packages==================================%
-\usepackage{luacode}
-\usepackage{lscape,booktabs,latexsym,multicol,lmodern, natbib,graphicx,tikz,tkz-euclide, lipsum,siunitx, setspace,float}
-\usepackage{xcolor}
-\usepackage{amsmath,amsfonts,amssymb,amsthm}
-\everymath{\displaystyle}
-\usepackage{enumitem} % númeração dos items
-\setlist[enumerate, 1]{label =\textbf{\arabic*.}} % númeração global de itens e subitems, em 1,1.1,1.2,..
-\setlist[enumerate, 2]{label =\textbf{\theenumi \arabic*}} % númeração global de itens e subitems, em 1,1.1,1.2,..
-
-% configurações das questões, bem como: pontuação e estrutura.
-
-\usepackage{tasks} % cria lista curta
-\usepackage{exsheets} % cria questoes
-\SetupExSheets[points]{name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
-
-
-
-\newcommand{\titulo}[1]{%
-\begin{center}
-    {\LARGE {\scshape #1}}
-\end{center}
-}
-
-\newcommand{\linhaVertical}[2]{
-\setlength\columnseprule{#1}
-\def\columnseprulecolor{\color{#2}}%
-}
-
-
-\newcommand{\curso}{Matemática Aplicada | Janiheryson Felipe De Oliveira Martins}
-\newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha ~~~\textbf{Matricula:} 20223004788  ~~ \textbf{Semestre:} 2022.1}
-
-
-\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
-toc-reversed = true ,
-indent-first = true ,
-vscale = 2 ,
-pre-code = \rule{\linewidth}{1pt} ,
-post-code = \rule{\linewidth}{1pt} ,
-title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
-number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
-points-format = \itshape ,
-points-pre-code = ( ,
-points-post-code = ) ,
-join =
-{
-number[r,B]title[l,B](.333em,0pt) ;
-number[r,B]points[l,B](.333em,0pt)
-} ,
-attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
-}
-
-%\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
-
-
-\AddToShipoutPictureBG{
-\begin{tikzpicture}[remember picture, overlay]
-    % \node[inner sep=0] at (17.5,28) {\includegraphics[width=.25\textwidth]{estrutura/ifrncnat.pdf}};
-    
-    \draw (19,28) node[left] {\textbf{\curso}};
-    
-    \draw (19,27.6) node[left] {\footnotesize \projeto};
-    
-    \node[inner sep=0] at (3.8,28) {\includegraphics[width=.3\textwidth]{ifrncnat.pdf}};
-    
-    % \node[inner sep=0] at (4.3,1.5) {\includegraphics[width=.35\textwidth]{estrutura/intagramSite.pdf}};
-    
-\end{tikzpicture}
-}
-
-% \AddToShipoutPictureBG{\includegraphics[width=\paperwidth,height=\paperheight]{estrutura/background.pdf}}
-
-
-% FALTA ATIVAR O RODAPÉ OS LINK NO RODAPÉ
-
-
 \hypersetup{pdfauthor={Matheus Jonatha (@mathjonatha)},
             pdftitle={Lista de Exercícios – Aula 01 - Matemática Aplicada},
             pdfsubject={Matemática Aplicada - Janiheryson Felipe De Oliveira Martins},
@@ -404,7 +162,9 @@ attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
 \begin{document}
 
 
-\titulo{Lista de Exercícios - Aula 1}
+\begin{center}
+\textbf{Lista de Exercícios - Aula 1}
+\end{center}
 
 \begin{multicols}{2}
 
@@ -466,7 +226,10 @@ Ou ainda,
 \end{multicols}
 
 \newpage
-\titulo{Lista de Exercícios - Aula 2}
+
+\begin{center}
+\textbf{Lista de Exercícios - Aula 2}
+\end{center}
 
 
 % \begin{center}
