@@ -10,11 +10,370 @@
     % bibliography=totoc,%    
 }%
 
-\input{estrutura/preamble.tex}
-\input{estrutura/especificacoes.tex}
-\usepackage{capt-of}%%To get the caption
-\usepackage[bitstream-charter, uppercase=upright]{mathdesign} % Fonte ativa, estudar o pacote mathdesign
-\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+%\usepackage[math]{anttor} % fonte um pouco mais estilizada
+\usepackage{import}
+%\usepackage{parskip}
+\usepackage{fontawesome}
+%=========================Packages==================================%
+\usepackage{luacode}
+\usepackage{lscape,booktabs,latexsym,multicol,lmodern, natbib,graphicx,tikz,tkz-euclide, lipsum,siunitx, setspace,float}
+\usepackage{xcolor}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\everymath{\displaystyle}
+\usepackage{enumitem} % númeração dos items
+\setlist[enumerate, 1]{label =\textbf{\arabic*.}} % númeração global de itens e subitems, em 1,1.1,1.2,..
+\setlist[enumerate, 2]{label =\textbf{\theenumi \arabic*}} % númeração global de itens e subitems, em 1,1.1,1.2,..
+
+% configurações das questões, bem como: pontuação e estrutura.
+
+\usepackage{tasks} % cria lista curta
+\usepackage{exsheets} % cria questoes
+\SetupExSheets[points]{name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
+
+\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
+toc-reversed = true ,
+indent-first = true ,
+vscale = 2 ,
+pre-code = \rule{\linewidth}{1pt} ,
+post-code = \rule{\linewidth}{1pt} ,
+title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
+number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
+points-format = \itshape ,
+points-pre-code = ( ,
+points-post-code = ) ,
+join =
+{
+number[r,B]title[l,B](.333em,0pt) ;
+number[r,B]points[l,B](.333em,0pt)
+} ,
+attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
+}
+
+%\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
+
+\newcommand{\titulo}[1]{%
+\begin{center}
+    {\LARGE {\scshape #1}}
+\end{center}
+}
+
+\newcommand{\linhaVertical}[2]{
+\setlength\columnseprule{#1}
+\def\columnseprulecolor{\color{#2}}%
+}
+
+\graphicspath{{imgs/}} %informa a pasta em que as imagens estão
+%\usepackage{showframe} %Mostra linhas de marcação e margens
+%FONTES
+%\usepackage{fontspec}
+%\usepackage{avant}
+%\usepackage{mathptmx}
+\usepackage{times}
+%\usepackage[classicRfeIm]{kpfonts}
+%\usepackage{kurier}
+
+\usepackage{eso-pic,graphicx} % Para funcionar o background
+
+\usepackage{hyperref}% add hypertext capabilities
+%\usepackage{txfonts}
+%\usepackage{mathrsfs}
+
+% CORES
+\usepackage{xcolor}
+\definecolor{corprimaria}{RGB}{10,48,123} 
+\definecolor{corsecundaria}{RGB}{116,23,255}
+\definecolor{corlinha}{RGB}{0,102,204}
+
+\definecolor{corexercicio}{RGB}{38,38,38}
+\definecolor{cordefinicao}{RGB}{47,158,65}
+% \definecolor{corexemplo}{RGB}{116,23,255}
+\definecolor{corexemplo}{RGB}{38,38,38}
+
+\definecolor{color1}{HTML}{2B323F}
+\definecolor{color2}{HTML}{CAEC7D}
+
+% ESTILOS
+\newtheoremstyle{geral}% Nome do estilo do teorema
+{0pt}% Espaço acima
+{0pt}% Espaço abaixo
+{\normalfont}% Fonte do corpo
+{}% Indent amount
+{\small\bf\sffamily\color{cor4}}% Theorem head font
+{:}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{} % Optional theorem note
+
+\newcounter{dummy}
+\newcounter{Exer}
+\newcounter{exer}
+\newcounter{exem}
+\theoremstyle{geral}
+\newtheorem{ExercicioT}[Exer]{Exercício resolvido}
+% \newtheorem{exercicioT}[exer]{ }
+\newtheorem{definicaoT}[dummy]{Conceito}
+\newtheorem{exemploT}[exem]{Exemplo}
+\newtheorem{obsT}{Observação}
+
+\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+
+% Caixa de exercícios
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=corexercicio!10,
+linecolor=corexercicio,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{caixaEx}	
+
+% Caixa de definição
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=cordefinicao!10,
+linecolor=cordefinicao,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{caixaDE}	
+
+% Caixa de exemplos
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=corexemplo!10,
+linecolor=corexemplo,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{caixaExem}	
+
+% Caixa de observações	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=cor2!10,
+linecolor=cor2,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{caixaObs}
+
+
+\newenvironment{Exercicio}{\begin{caixaEx}\begin{ExercicioT}}{\end{ExercicioT}\end{caixaEx}}
+% \newenvironment{exercicio}{\begin{caixaEx}\begin{exercicioT}}{\end{exercicioT}\end{caixaEx}}
+\newenvironment{definicao}{\begin{caixaDE}\begin{definicaoT}}{\end{definicaoT}\end{caixaDE}}
+\newenvironment{exemplo}{\begin{caixaExem} \begin{exemploT}}{\end{exemploT}\end{caixaExem}}
+
+\newenvironment{obs}{\begin{caixaObs}\begin{obsT}}{\end{obsT}\end{caixaObs}}
+
+\newenvironment{exercicio}[2][{\color{corexercicio}Exercício}]{\begin{trivlist}
+
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+%===================================================
+% MARGINS
+%\usepackage[top=8mm, bottom=20mm, left=8mm, right=8mm]{geometry}
+\usepackage{geometry}
+\geometry{
+	paper=a4paper, 
+	top=3cm, 
+	bottom=2.5cm, 
+	left=1cm, 
+	right=1cm,
+	headheight=14pt, % Header height
+	footskip=1.4cm, % Espaço da margem inferior à linha de base do rodapé
+	headsep=10pt, % Espaço da margem superior até a linha de base do cabeçalho
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+
+% NOVOS COMANDOS
+\newcommand{\atv}{Lista de Exercícios 00}
+\newcommand{\preceptor}{Monitor: Matheus Jonatha}
+
+%%------------------------------------------
+%% CABEÇALHO E RODAPÉ
+%%------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} %linha horizontal no topo da pagina
+%\renewcommand{\footrulewidth}{0.4pt} %linha horizontal no pé da pagina
+
+% \fancyhead[L]{}
+\fancyhead[R]{
+% \textbf{Monitoria AnnWay - Curso de Matemática Básica}
+    % \begin{tikzpicture}[overlay]
+    %     \node[draw=corlinha,
+    %     circle,minimum width=.7cm, minimum height=.7cm,
+    %     anchor=south west,
+    %     fill=corlinha,font=\fontsize{11}{15}\sffamily,inner sep=1pt,outer sep=1pt]
+    %     at (0,0){\textcolor{white}{\thepage}};
+    % \end{tikzpicture}
+}
+% \fancyhead[C]{}
+
+\fancyfoot[R]{
+    \begin{tikzpicture}[overlay]
+        \node[draw=corlinha,
+        circle,minimum width=.7cm, minimum height=.7cm,
+        anchor=south west,
+        fill=corlinha,font=\fontsize{11}{15}\sffamily,inner sep=1pt,outer sep=1pt]
+        at (0,0){\textcolor{white}{\bfseries \thepage}};
+    \end{tikzpicture}
+}
+\fancyfoot[C]{}
+
+%\setlength\parindent{0pt}
+%\setlength\parskip{1.5ex}
+%\setlength\parsep{1.5\parskip}
+%\thispagestyle{empty}%\bigskip %Rodapé na primeira pagina
+
+
+%para nao ficar o retangulo em volta dos links, apenas muda a cor dos caracteres
+\hypersetup{colorlinks,
+linkcolor=blue,
+filecolor=blue,
+urlcolor=blue,
+citecolor=blue }
+
+
+
+% QUESTÕES
+% configurações das questões, bem como: pontuação e estrutura.
+
+\usepackage{tasks} % cria lista curta
+\usepackage{exsheets} % cria questoes
+\SetupExSheets[points]{ name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
+\SetupExSheets[question]{name=Exercício}
+
+\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
+toc-reversed = true ,
+indent-first = true ,
+vscale = 2 ,
+pre-code = \rule{\linewidth}{1pt} ,
+post-code = \rule{\linewidth}{1pt} ,
+title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
+number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
+points-format = \itshape ,
+points-pre-code = ( ,
+points-post-code = ) ,
+join =
+{
+number[r,B]title[l,B](.333em,0pt) ;
+number[r,B]points[l,B](.333em,0pt)
+} ,
+attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
+}
+
+%\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+%\usepackage[math]{anttor} % fonte um pouco mais estilizada
+\usepackage{import}
+%\usepackage{parskip}
+\usepackage{fontawesome}
+%=========================Packages==================================%
+\usepackage{luacode}
+\usepackage{lscape,booktabs,latexsym,multicol,lmodern, natbib,graphicx,tikz,tkz-euclide, lipsum,siunitx, setspace,float}
+\usepackage{xcolor}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\everymath{\displaystyle}
+\usepackage{enumitem} % númeração dos items
+\setlist[enumerate, 1]{label =\textbf{\arabic*.}} % númeração global de itens e subitems, em 1,1.1,1.2,..
+\setlist[enumerate, 2]{label =\textbf{\theenumi \arabic*}} % númeração global de itens e subitems, em 1,1.1,1.2,..
+
+% configurações das questões, bem como: pontuação e estrutura.
+
+\usepackage{tasks} % cria lista curta
+\usepackage{exsheets} % cria questoes
+\SetupExSheets[points]{name=ponto/s,number-format=\color{blue}} % define as configurações de pontuação das questões, e a cor da pontuação.
+
+\DeclareInstance{exsheets-heading}{fancy-wp}{default}{
+toc-reversed = true ,
+indent-first = true ,
+vscale = 2 ,
+pre-code = \rule{\linewidth}{1pt} ,
+post-code = \rule{\linewidth}{1pt} ,
+title-format = \large\scshape\color{rgb:red,0.65;green,0.04;blue,0.07} ,
+number-format = \large\bfseries\color{rgb:red,0.02;green,0.04;blue,0.48} ,
+points-format = \itshape ,
+points-pre-code = ( ,
+points-post-code = ) ,
+join =
+{
+number[r,B]title[l,B](.333em,0pt) ;
+number[r,B]points[l,B](.333em,0pt)
+} ,
+attach = { main[hc,vc]number[hc,vc](0pt,0pt) }
+}
+
+%\SetupExSheets{headings=fancy-wp} % estilo diferente para o topo do enunciado com o nome " Exercício
+
+\newcommand{\titulo}[1]{%
+\begin{center}
+    {\LARGE {\scshape #1}}
+\end{center}
+}
+
+\newcommand{\linhaVertical}[2]{
+\setlength\columnseprule{#1}
+\def\columnseprulecolor{\color{#2}}%
+}
+
+
+\AddToShipoutPictureBG{
+\begin{tikzpicture}[remember picture, overlay]
+    % \node[inner sep=0] at (17.5,28) {\includegraphics[width=.25\textwidth]{estrutura/ifrncnat.pdf}};
+    
+    \draw (19,28) node[left] {\textbf{\curso}};
+    
+    \draw (19,27.6) node[left] {\footnotesize \projeto};
+    
+    \node[inner sep=0] at (3.8,28) {\includegraphics[width=.3\textwidth]{ifrncnat.pdf}};
+    
+    % \node[inner sep=0] at (4.3,1.5) {\includegraphics[width=.35\textwidth]{estrutura/intagramSite.pdf}};
+    
+\end{tikzpicture}
+}
+
+% \AddToShipoutPictureBG{\includegraphics[width=\paperwidth,height=\paperheight]{estrutura/background.pdf}}
+
+
+% FALTA ATIVAR O RODAPÉ OS LINK NO RODAPÉ
+
+
 \hypersetup{pdfauthor={Matheus Jonatha (@mathjonatha)},
             pdftitle={Lista de Exercícios – Aula 01 - Matemática Aplicada},
             pdfsubject={Matemática Aplicada - Janiheryson Felipe De Oliveira Martins},
@@ -22,42 +381,122 @@
             pdfproducer={Produzido e compilado no overleaf.com},
             pdfcreator={LuaLaTeX}}
 
-% \newcommand{\curso}{LIC.0910 - Equações Diferenciais Ordinárias - Francisco Batista de Medeiros}
-% \newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha Bernardo dos Santos ~~~\textbf{Matrícula:} 20181014300002 ~~ \textbf{Semestre:} 2021.1}
-
-\newcommand{\curso}{Matemática Aplicada | Janiheryson Felipe De Oliveira Martins}
-\newcommand{\projeto}{\textbf{Discente:} Matheus Jonatha ~~~\textbf{Matricula:} 20223004788  ~~ \textbf{Semestre:} 2022.1}
-
-% \newcommand{\curso}{ Matemática Básica - Monitoria IFRN}
-% \newcommand{\projeto}{\textbf{Estudante:} Francesco ~~~\textbf{Professor:} Matheus Jonatha}
-
-\SetupExSheets{solution/print=true} % Mostra a solução das questões quando print = true
-
-% \usepackage[use-files]{xsim}
-
-
-% Início do documento           
 \begin{document}
-% \settasks{
-%     label = \theexercise.\arabic* ,
-%     item-indent = 2em ,
-%     label-width = 2em ,
-%     label-offset = 0pt
-% }
-\import{estrutura}{cabecalho.tex}
 
 
-% \import{disciplinas/algebra1}{lista03.tex}
-\import{disciplinas/matematica}{lista01.tex}
-% \import{disciplinas/monitoria}{lista_notacao_cientifica.tex}
-% \import{disciplinas/analise}{lista01.tex}
-% \import{disciplinas/analise}{lista02.tex}
-% \import{disciplinas/analise}{lista04.tex}
+\titulo{Lista de Exercícios - Aula 1}
 
-% \begin{tasks}(2)
-% \task 1
-% \task 2
-% \task 3
-% \task 4
-% \end{tasks}
+\begin{multicols}{2}
+
+\setlength\columnseprule{1pt}
+\def\columnseprulecolor{\color{corlinha}}%
+
+\begin{question}
+Como o salgadinho sofreu um aumento após a redução da quantidade das gramas no pacote, o preço continua o mesmo valor de R\$ 3,00.
+
+Considerando qual seria o seu novo valor sem o aumento, teríamos que:
+
+\begin{align*}
+90x &= 80 \cdot 3   \\
+x &= \frac{240}{90} \\
+x &\approx 2,7
+ \end{align*}
+ 
+Agora fazendo o aumento de 12,5\%, teremos que:
+\begin{align*}
+   100x &= 2,7 \cdot 112,5\\
+   x &= \frac{300}{100} \\
+   x &= 3
+\end{align*}
+Logo, temos que o valor se mantém o mesmo após as alterações, continuando R\$ 3,00.
+\end{question}
+
+
+\begin{question}
+Para esse caso temos que achar o tempo de maneira individual, tanto para os 30\% quanto para o 70\%. Ao fim somando seus tempos. Teremos então que:
+
+\begin{align*}
+\frac{1}{8}&= \frac{x}{20} \\
+x&= \frac{20}{8} \\
+x &= 2,5\\
+ \end{align*}
+Assim encontramos já que o tempo para os oito núcleos executar essa tarefa é de 2,5 segundos. Para finalizar, é preciso encontrar o tempo equivalente utilizado nos porcentagens informadas no enunciados. Assim temos:
+
+\begin{align*}
+\textrm{Tempo total de processamento} &= 2,5 \cdot \frac{30}{100} + 20 \cdot \frac{70}{100}\\
+\textrm{Tempo total de processamento} &= 14,75 \textrm{ segundos}\\
+ \end{align*}
+ 
+Por fim, concluímos que o tempo total foi de 14,75 segundos para executar essa tarefa utilizando os oito núcleos.
+\end{question}
+
+\begin{question}
+Como temos que a constante de proporcionalidade é \(\frac{x}{y} = k\). Podemos encontrar fazendo a relação final informada no enunciado, onde teremos que fazer entre o tempo gasto na ordenação(\(t\)) e o número de elementos(\(n\)) da lista.\par
+Inicialmente temos que \(k = 0,00015\), pois  é \(\frac{t}{n}\). Ainda podemos escrever como sendo \(k = \frac{15}{10^5}\), disso temos que a função de proporcionalidade pode ser:
+
+\[f(n) = n \cdot \frac{15}{10^5}\]
+
+Ou ainda,
+
+\[f(n) = n \cdot 0,00015\]
+
+\end{question}
+% \break
+% \columnbreak
+\end{multicols}
+
+\newpage
+\titulo{Lista de Exercícios - Aula 2}
+
+
+% \begin{center}
+% \textbf{Lista de Exercícios - Aula 2 }
+% \end{center}
+
+\begin{multicols}{2}
+\setlength\columnseprule{1pt}
+\def\columnseprulecolor{\color{corlinha}}%
+
+\begin{question}
+Para os dados informados temos que o único valor que é inversamente proporcional será o número de torneiras. Sendo assim podemos fazer já de maneira direta que:
+
+\begin{align*}
+\frac{18}{x} &= \frac{1000 \cdot 5}{5000 \cdot 2}\\
+\frac{18}{x}&= \frac{5000}{8000}\\
+18 \cdot 8000&= 5000 \cdot x \\
+x &=  \frac{144 000}{5000}\\
+x&= 28,8\\
+ \end{align*}
+ 
+Para fim, convertendo para minutos e segundos, temos que 28,8 será exatamente \textbf{28 minutos e 48 segundos} para que o tanque com 4000 L seja completamente cheio com cinco torneiras abertas.
+\end{question}
+
+\begin{question}
+Usando a mesma ideia da questão anterior, temos que nesse caso todos os valores são proporcionais. Com isso temos que:
+
+\begin{align*}
+\frac{4800}{x}&= \frac{20 \cdot 30}{ 65 \cdot 100} \\
+x \cdot 600 &= 6500 \cdot 4800\\
+x &=  \frac{6500 \cdot 4800}{600}\\
+x &= \frac{650 \cdot 480}{6}\\
+x & = 52 000
+ \end{align*}
+ Temos assim que a empresa gastará \textbf{52 mil reais} com alimentação para os 65 funcionários nesses 100 dias.
+\end{question}
+
+\begin{question}
+Nesse caso temos que a grandeza inversamente proporcional nesse caso será o número de pessoas, assim resolvendo como das maneiras anteriores, temos que:
+
+\begin{align*}
+\frac{15}{x} &= \frac{30 \cdot 100}{ 20 \cdot 300} \\
+\frac{15}{x}&= \frac{1}{2} \\
+x &=  30\\
+ \end{align*}
+
+Por fim, temos que será necessário \textbf{30 dias} para as 30 pessoas consumirem os 300kg de arroz.
+\end{question}
+
+\end{multicols}
+
+
 \end{document}
